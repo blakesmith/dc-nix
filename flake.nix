@@ -5,6 +5,7 @@
   };
 
   outputs = { ... }: {
-    nixosModules.dc-nix = import ./modules/default.nix;
+    nixosModules.dc-nix = import ./modules;
+    lib = import ./lib;
   };
 }
