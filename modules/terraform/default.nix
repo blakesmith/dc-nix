@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./regions
-    ./terraform
+    ./hosts.nix
   ];
 }
