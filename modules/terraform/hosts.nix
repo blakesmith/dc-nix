@@ -13,8 +13,8 @@ let
           name = hostAndValue.name;
           value = {
             name = hostAndValue.name;
-            image = config.region.incus.defaultImage;
-            project = config.region.incus.project;
+            image = config.dc.region.incus.defaultImage;
+            project = config.dc.region.incus.project;
             profiles = [ "default" ];
             type = "virtual-machine";
 
@@ -25,7 +25,7 @@ let
         })
       (hostAndValue:
         ((builtins.hasAttr "provisioner" hostAndValue.value) && hostAndValue.value.provisioner == "terraform"))
-      config.region.hosts);
+      config.dc.region.hosts);
   };
 
   cfg = config.dc.terraform.hosts;
@@ -39,7 +39,7 @@ in
   config = lib.mkIf cfg.enable (lib.attrsets.recursiveUpdate hostResources {
     resource.incus_profile.default = {
       name = "default";
-      project = config.region.incus.project;
+      project = config.dc.region.incus.project;
 
       config = {
         "limits.memory" = "2GB";

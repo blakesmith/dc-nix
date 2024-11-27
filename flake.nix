@@ -5,7 +5,8 @@
   };
 
   outputs = { ... }: {
-    nixosModules.dc-nix = import ./modules;
+    nixosModules.terraform = (import ./modules).terraform;
+    nixosModules.nixos = (import ./modules).nixos;
     lib = import ./lib;
   };
 }

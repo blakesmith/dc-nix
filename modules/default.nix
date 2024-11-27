@@ -1,8 +1,14 @@
-{ ... }:
-
 {
-  imports = [
-    ./regions
-    ./terraform
-  ];
+  nixos = { ... }: {
+    imports = [
+      ./regions
+    ];
+  };
+
+  terraform = { ... }: {
+    imports = [
+      ./regions
+      ./terraform
+    ];
+  };
 }
