@@ -1,7 +1,7 @@
 { lib, ... }:
 
 {
-  options.region.incus = {
+  options.dc.region.incus = {
     project = lib.mkOption {
       type = lib.types.str;
       description = "Project to create resources in";
@@ -21,7 +21,7 @@
     };
   };
 
-  options.region = {
+  options.dc.region = {
     identifier = lib.mkOption {
       type = lib.types.str;
       description = "Region identifier";
