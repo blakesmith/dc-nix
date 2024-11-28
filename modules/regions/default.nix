@@ -98,7 +98,7 @@
 
           dns = lib.mkOption {
             description = "DNS Options for the endpoint";
-            type = lib.types.nullOr (lib.submodule {
+            type = lib.types.nullOr (lib.types.submodule {
               options = {
                 records = lib.mkOption {
                   description = "Array of DNS A records to provision for the endpoint";
