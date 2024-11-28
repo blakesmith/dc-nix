@@ -60,6 +60,18 @@
             default = "manual";
             example = "route53";
           };
+
+          aws = lib.mkOption {
+            description = "AWS specific DNS settings";
+            type = lib.types.submodule {
+              options = {
+                zoneId = lib.mkOption {
+                  description = "AWS zone identifier";
+                  type = lib.types.str;
+                };
+              };
+            };
+          };
         };
       });
       default = {};
