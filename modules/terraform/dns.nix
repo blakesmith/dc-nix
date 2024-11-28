@@ -13,7 +13,7 @@ let
       (hostAndValue: {
         name = hostAndValue.name;
         value = {
-          zone_id = "\${aws_route53_zone.public-zone.zone_id}";
+          zone_id = "\${aws_route53_zone.${cfg.tfIdentifier}.zone_id}";
           name = "${hostAndValue.name}.${publicZone}";
           type = "A";
           ttl = "300";
@@ -28,7 +28,7 @@ let
 
   endpointRecords = {
     resource.aws_route53_record = builtins.mapAttrs (name: endpoint: {
-      zone_id = "\${aws_route53_zone.public-zone.zone_id}";
+      zone_id = "\${aws_route53_zone.${cfg.tfIdentifier}.zone_id}";
       name = endpoint.address;
       type = "A";
       ttl = "300";
@@ -42,10 +42,15 @@ in
 {
   options.dc.terraform.dns = {
     enable = lib.mkEnableOption "Enable DNS provisioning";
+    tfIdentifier = lib.mkOption {
+      type = lib.types.str;
+      description = "Terraform identifier used to pin resources";
+      default = "public-zone";
+    };
   };
 
   config = lib.mkIf cfg.enable (lib.attrsets.recursiveUpdate (lib.attrsets.recursiveUpdate hostRecords endpointRecords) {
-    resource.aws_route53_zone."public-zone" = {
+    resource.aws_route53_zone."${cfg.tfIdentifier}" = {
       name = config.dc.region.dnsZones.public.name;
     };
   });
