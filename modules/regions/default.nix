@@ -21,6 +21,15 @@
     };
   };
 
+  options.dc.region.aws = {
+    region = lib.mkOption {
+      type = lib.types.str;
+      description = "AWS region when aws resources are configured";
+      example = "us-east-1";
+      default = "us-east-1";
+    };
+  };
+
   options.dc.region = {
     identifier = lib.mkOption {
       type = lib.types.str;
