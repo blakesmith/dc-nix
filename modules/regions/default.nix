@@ -110,7 +110,7 @@
       description = "List of hosts and their respective host information";
       type = lib.types.attrsOf (lib.types.submodule {
         options = {
-          ipv4Address = lib.mkOption {
+          internalIpv4Address = lib.mkOption {
             type = lib.types.nullOr (lib.types.str);
             description = "IPv4 address of the host. Can be null during provisioning";
             default = null;
