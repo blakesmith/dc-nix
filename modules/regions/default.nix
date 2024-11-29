@@ -132,17 +132,30 @@
       type = lib.types.attrsOf (lib.types.submodule {
         options = {
           internalIpv4Address = lib.mkOption {
-            type = lib.types.nullOr (lib.types.str);
             description = "IPv4 address of the host. Can be null during provisioning";
+            type = lib.types.nullOr (lib.types.str);
             default = null;
             example = "10.0.0.2";
           };
 
           provisioner = lib.mkOption {
-            type = lib.types.enum [ "none" "terraform" ];
             description = "Method that provisions the host / machine";
+            type = lib.types.enum [ "none" "terraform" ];
             default = "none";
             example = "terraform";
+          };
+
+          roles = lib.mkOption {
+            description = "List of named roles to apply to the host";
+            type = lib.types.listOf (lib.types.str);
+            default = [];
+            example = ["web" "mysql"];
+          };
+
+          region = lib.mkOption {
+            description = "Region identifier for the host";
+            type = lib.types.str;
+            example = "us-region-1";
           };
         };
       });
